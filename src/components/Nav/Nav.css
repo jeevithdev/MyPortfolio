@@ -1,0 +1,168 @@
+/* ══════════════════════════════════════════════════════
+   NAV — Aligned to same --layout-max as every section
+   ══════════════════════════════════════════════════════ */
+
+/* Outer wrapper — full width bar sitting at top */
+.nav-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 16px var(--layout-px);       /* same horizontal padding as sections */
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* When scrolled — frosted backdrop on the full bar */
+.nav-wrap--scrolled {
+  background: rgba(248, 246, 248, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 rgba(81, 31, 82, 0.08);
+}
+
+/* Inner row — constrained to same max-width as content */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--layout-max);         /* matches .container */
+  margin-inline: auto;
+  /* override glass defaults for the top bar */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+/* Remove the glass::before shimmer on nav */
+.nav::before { display: none !important; }
+
+/* ─── Logo ─── */
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--deep);
+  flex-shrink: 0;
+}
+.nav__logo-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--deep);
+  color: var(--blush);
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav__logo-label {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--deep);
+}
+
+/* ─── Desktop links ─── */
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav__link {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--plum);
+  text-decoration: none;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--deep);
+  transition: width 0.25s var(--ease);
+}
+.nav__link:hover { color: var(--deep); }
+.nav__link:hover::after { width: 100%; }
+
+.nav__link--cta {
+  padding: 9px 22px;
+  border-radius: var(--r-pill);
+  background: var(--deep);
+  color: var(--blush) !important;
+  box-shadow: 0 3px 14px rgba(81, 31, 82, 0.3);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s !important;
+}
+.nav__link--cta::after { display: none !important; }
+.nav__link--cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(81, 31, 82, 0.42) !important;
+}
+
+/* ─── Hamburger ─── */
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav__burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--deep);
+  border-radius: 2px;
+  transition: transform 0.3s var(--ease), opacity 0.2s;
+}
+.nav__burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__burger.open span:nth-child(2) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── Mobile drawer ─── */
+.nav__drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(248, 246, 248, 0.97);
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transform: translateY(-100%);
+  visibility: hidden;           /* hides content & removes from a11y tree */
+  pointer-events: none;
+  transition: transform 0.4s var(--ease), visibility 0s 0.4s;
+  z-index: 90;
+}
+.nav__drawer--open {
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform 0.4s var(--ease), visibility 0s 0s;
+}
+.nav__drawer-link {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--deep);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav__drawer-link:hover { color: var(--plum); }
+
+@media (max-width: 680px) {
+  .nav__links { display: none; }
+  .nav__burger { display: flex; }
+}

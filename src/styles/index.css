@@ -1,0 +1,184 @@
+/* =============================================
+   JEEVITH K PORTFOLIO — Light Theme
+   Palette: #FFFFFF · #ECD4EA · #A987A8 · #693B69 · #511F52
+   ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  /* Palette */
+  --white:   #FFFFFF;
+  --blush:   #ECD4EA;
+  --violet:  #A987A8;
+  --plum:    #693B69;
+  --deep:    #511F52;
+
+  /* Light-theme surfaces */
+  --bg:        linear-gradient(145deg, #f3eef3 0%, #e4cde2 100%);
+  --bg-solid:  #f3eef3;
+  --glass:     rgba(255, 255, 255, 0.88);          /* more opaque = readable on blush bg */
+  --glass-border: rgba(105, 59, 105, 0.14);        /* coloured border = visible separation */
+  --shadow:    rgba(81, 31, 82, 0.14);
+  --shadow-md: rgba(81, 31, 82, 0.26);             /* stronger depth */
+
+  /* Code block stays dark */
+  --code-bg: rgba(81, 31, 82, 0.95);
+
+  /* Typography */
+  --font-head: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --r: 20px;
+  --r-sm: 12px;
+  --r-pill: 9999px;
+
+  /* ─── Unified layout system ─── */
+  --layout-max: 1200px;   /* single source of width truth */
+  --layout-px: 24px;      /* horizontal padding on all sides */
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-solid);
+  background-image: var(--bg);
+  background-attachment: fixed;
+  color: #1e1024;
+  overflow-x: hidden;
+  line-height: 1.65;
+  min-height: 100svh;
+}
+
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--blush); }
+::-webkit-scrollbar-thumb { background: var(--plum); border-radius: 2px; }
+
+/* ─── Glass island ──────────────────────── */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: var(--r);
+  /* layered shadow: close soft + far diffuse */
+  box-shadow:
+    0 2px  8px rgba(81,31,82,0.08),
+    0 12px 40px rgba(81,31,82,0.14);
+  position: relative;
+  overflow: hidden;
+}
+/* Removed the extra ::before shimmer that was washing everything out */
+
+/* ─── Shared utilities ──────────────────── */
+.mono { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.05em; }
+/* single layout container — used by Nav AND every section */
+.container {
+  width: 100%;
+  max-width: var(--layout-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-px);
+  min-width: 0;
+}
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--plum);
+  background: rgba(105,59,105,0.1);
+  border: 1px solid rgba(105,59,105,0.18);
+  padding: 4px 13px;
+  border-radius: var(--r-pill);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--font-head);
+  /* rem-only scaling — no vw to prevent overflow */
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--deep);
+}
+@media (min-width: 640px)  { .section-title { font-size: 2.4rem; } }
+@media (min-width: 1024px) { .section-title { font-size: 2.8rem; } }
+.text-accent { color: var(--plum); }
+.section { padding: 90px 0; }
+@media (max-width: 640px) { .section { padding: 60px 0; } }
+
+/* ─── Floating pill (skill tag style from HTML) */
+.floating-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--violet);
+  color: var(--white);
+  padding: 5px 16px;
+  border-radius: var(--r-pill);
+  font-size: 0.76rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(105,59,105,0.25);
+}
+
+/* ─── Chip (lighter variant) ─────────────── */
+.chip {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: rgba(105,59,105,0.1);
+  border: 1px solid rgba(105,59,105,0.15);
+  color: var(--plum);
+}
+
+/* ─── Buttons ────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 30px;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-fill {
+  background: var(--deep);
+  color: var(--blush);
+  box-shadow: 0 4px 20px var(--shadow-md);
+}
+.btn-fill:hover { box-shadow: 0 8px 28px rgba(81,31,82,0.35); }
+.btn-outline {
+  background: var(--white);
+  color: var(--deep);
+  border: 2px solid rgba(81,31,82,0.35);   /* visible border, not ghost */
+}
+.btn-outline:hover { border-color: var(--deep); box-shadow: 0 6px 20px var(--shadow-md); }
+
+/* ─── Reveal ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal[style*='--d'] { transition-delay: var(--d, 0s); }
+
+/* ─── Code block stays dark ──────────────── */
+.code-glass {
+  background: var(--code-bg);
+  border: 1px solid rgba(236,212,234,0.1);
+  border-radius: var(--r);
+  backdrop-filter: blur(16px);
+}
