@@ -20,7 +20,6 @@
   grid-template-columns: 1.1fr 1fr;
   gap: 28px;
   align-items: start;
-  transition-delay: var(--d, 0s);
 }
 /* Reverse every even row — image switches sides */
 .proj-row--rev { direction: rtl; }
