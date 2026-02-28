@@ -29,10 +29,14 @@
 /* ── Image panel ── */
 .proj-img-wrap {
   position: relative;
+  background: var(--white);
   border-radius: var(--r);
+  border: 1px solid var(--glass-border);
   overflow: hidden;
   height: 340px;
-  box-shadow: 0 8px 32px rgba(81, 31, 82, 0.14);
+  box-shadow: 
+    0 2px 8px rgba(81, 31, 82, 0.08),
+    0 12px 40px rgba(81, 31, 82, 0.14);
   flex-shrink: 0;
 }
 .proj-img {
@@ -53,8 +57,8 @@
   inset: 0;
   background: linear-gradient(
     160deg,
-    rgba(20, 8, 28, 0.08) 0%,
-    rgba(20, 8, 28, 0.45) 100%
+    rgba(20, 8, 28, 0.02) 0%,
+    rgba(20, 8, 28, 0.6) 100%
   );
   pointer-events: none;
 }
@@ -99,36 +103,35 @@
   font-weight: 800;
   color: var(--deep);
 }
-.proj-desc { font-size: 0.87rem; color: rgba(30, 16, 36, 0.58); line-height: 1.75; }
+.proj-desc { font-size: 0.87rem; color: rgba(30, 16, 36, 0.85); line-height: 1.75; }
 
 .proj-section { display: flex; flex-direction: column; gap: 8px; }
-.proj-label { color: var(--plum); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.proj-label { color: var(--deep); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 .proj-chips { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .proj-focus { list-style: none; display: flex; flex-direction: column; gap: 5px; margin: 0; padding: 0; }
 .proj-focus li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   font-size: 0.83rem;
-  color: rgba(30, 16, 36, 0.6);
-  padding-left: 16px;
-  position: relative;
+  color: rgba(30, 16, 36, 0.88);
   line-height: 1.6;
 }
-.proj-focus li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
+.proj-focus__icon {
   color: var(--plum);
-  font-size: 0.72rem;
-  top: 2px;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 4px;
 }
 
 .proj-learning {
-  background: rgba(81, 31, 82, 0.05);
-  border: 1px solid rgba(81, 31, 82, 0.1);
+  background: rgba(105, 59, 105, 0.08);
+  border: 1px solid rgba(105, 59, 105, 0.16);
   border-radius: var(--r-sm);
   padding: 14px 16px;
 }
-.proj-learning-text { font-size: 0.83rem; color: rgba(30, 16, 36, 0.55); line-height: 1.72; }
+.proj-learning-text { font-size: 0.83rem; color: rgba(30, 16, 36, 0.85); line-height: 1.72; }
 
 /* ══════════════════
    RESPONSIVE

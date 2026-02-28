@@ -112,18 +112,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .section { padding: 90px 0; }
 @media (max-width: 640px) { .section { padding: 60px 0; } }
 
-/* ─── Floating pill (skill tag style from HTML) */
 .floating-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: var(--violet);
+  background: var(--deep);
   color: var(--white);
   padding: 5px 16px;
   border-radius: var(--r-pill);
   font-size: 0.76rem;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(105,59,105,0.25);
+}
+.floating-pill__icon {
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
 }
 
 /* ─── Chip (lighter variant) ─────────────── */

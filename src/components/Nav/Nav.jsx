@@ -23,7 +23,7 @@ export default function Nav() {
       <nav className="nav glass">
         {/* Logo */}
         <a href="#" className="nav__logo" onClick={() => setOpen(false)}>
-          <span className="nav__logo-box">JK</span>
+          <img src="/jk-favicon.svg" alt="JK" className="nav__logo-box" draggable="false" />
           <span className="nav__logo-label">Jeevith K</span>
         </a>
 

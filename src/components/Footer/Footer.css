@@ -16,12 +16,7 @@
 .footer__logo {
   width: 34px; height: 34px;
   border-radius: 10px;
-  background: var(--deep);
-  color: var(--blush);
-  font-family: var(--font-head);
-  font-weight: 800;
-  font-size: 0.82rem;
-  display: flex; align-items: center; justify-content: center;
+  display: block;
 }
 .footer__name { font-weight: 700; font-size: 0.9rem; color: var(--deep); }
 

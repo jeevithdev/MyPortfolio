@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { FiMail, FiGithub, FiLinkedin, FiCheck, FiArrowRight } from 'react-icons/fi'
 import './Contact.css'
 
 export default function Contact() {
@@ -45,15 +46,15 @@ export default function Contact() {
 
               <div className="contact__links">
                 <a href="mailto:jeevasri970@gmail.com" className="clink" id="email-link" aria-label="Send email">
-                  <span className="clink__icon" aria-hidden="true">✉</span>
+                  <span className="clink__icon" aria-hidden="true"><FiMail /></span>
                   jeevasri970@gmail.com
                 </a>
                 <a href="https://github.com/jeevithdev" target="_blank" rel="noopener noreferrer" className="clink" id="github-link" aria-label="GitHub profile">
-                  <span className="clink__icon mono" aria-hidden="true">GH</span>
+                  <span className="clink__icon" aria-hidden="true"><FiGithub /></span>
                   GitHub
                 </a>
                 <a href="https://linkedin.com/in/jeevithdev" target="_blank" rel="noopener noreferrer" className="clink" id="linkedin-link" aria-label="LinkedIn profile">
-                  <span className="clink__icon mono" aria-hidden="true">in</span>
+                  <span className="clink__icon" aria-hidden="true"><FiLinkedin /></span>
                   LinkedIn
                 </a>
               </div>
@@ -63,7 +64,7 @@ export default function Contact() {
             <div className="contact__right">
               {sent ? (
                 <div className="contact__sent" role="status" aria-live="polite">
-                  <div className="sent-icon" aria-hidden="true">✓</div>
+                  <div className="sent-icon" aria-hidden="true"><FiCheck /></div>
                   <p>Message sent! I'll get back to you soon.</p>
                 </div>
               ) : (
@@ -81,7 +82,7 @@ export default function Contact() {
                     <textarea id="cf-msg" name="message" rows={4} placeholder="Tell me about the role or project…" required />
                   </div>
                   <button type="submit" className="btn btn-fill-light btn-full" id="contact-submit">
-                    Send Message →
+                    Send Message <FiArrowRight style={{ marginLeft: '6px' }} />
                   </button>
                 </form>
               )}

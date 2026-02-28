@@ -7,10 +7,12 @@ import { TbApi } from 'react-icons/tb'
 import { MdOutlineRouter } from 'react-icons/md'
 import './Skills.css'
 
+import { LuServer, LuDatabase, LuCode } from 'react-icons/lu'
+
 /* ── Groups for floating cards ─────────────────────────── */
 const GROUPS = [
   {
-    icon: '⚙️',
+    icon: <LuServer />,
     title: 'Backend Development',
     border: '#511F52',
     skills: [
@@ -22,20 +24,20 @@ const GROUPS = [
     ],
   },
   {
-    icon: '🗄️',
+    icon: <LuDatabase />,
     title: 'Data & Storage',
-    border: '#693B69',
+    border: '#511F52',
     skills: [
       { icon: <SiMongodb />,      label: 'MongoDB',         color: '#26a65b' },
       { icon: <SiMysql />,        label: 'SQL Basics',      color: '#2563eb' },
-      { icon: <SiJavascript />,   label: 'CRUD Operations', color: '#693B69' },
+      { icon: <SiJavascript />,   label: 'CRUD Operations', color: '#b38d00' },
       { icon: <SiMongodb />,      label: 'Schema Design',   color: '#3d7a5c' },
     ],
   },
   {
-    icon: '🧱',
+    icon: <LuCode />,
     title: 'Engineering Foundations',
-    border: '#A987A8',
+    border: '#511F52',
     skills: [
       { icon: <SiJavascript />,   label: 'JavaScript ES6+', color: '#b38d00' },
       { icon: <SiGit />,          label: 'Git',             color: '#c2410c' },
@@ -95,7 +97,6 @@ export default function Skills() {
               style={{
                 '--d': `${gi * 0.1}s`,
                 '--border-col': g.border,
-                '--mt': `${gi === 1 ? '0' : gi === 0 ? '0' : '32'}px`,
               }}
             >
               <div className="sg__head">

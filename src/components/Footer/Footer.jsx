@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <div className="footer__logo">JK</div>
+          <img src="/jk-favicon.svg" alt="JK" className="footer__logo" draggable="false" />
           <span className="footer__name">Jeevith K</span>
         </div>
 

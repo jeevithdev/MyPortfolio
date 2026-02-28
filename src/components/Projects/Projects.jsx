@@ -1,4 +1,7 @@
 import { useEffect, useRef } from 'react'
+import { FiArrowRight } from 'react-icons/fi'
+import { SiNodedotjs, SiExpress, SiMongodb, SiJsonwebtokens, SiMongoose } from 'react-icons/si'
+import { FaUserShield } from 'react-icons/fa'
 import './Projects.css'
 
 const PROJECTS = [
@@ -8,7 +11,12 @@ const PROJECTS = [
     img: '/proj-attendance.png',
     tag: 'REST API',
     desc: 'Built backend APIs using Node.js and Express to manage student attendance records, structured routing, and database queries.',
-    stack: ['Node.js', 'Express.js', 'MongoDB', 'JWT'],
+    stack: [
+      { label: 'Node.js',   icon: <SiNodedotjs /> },
+      { label: 'Express.js',icon: <SiExpress /> },
+      { label: 'MongoDB',   icon: <SiMongodb /> },
+      { label: 'JWT',       icon: <SiJsonwebtokens /> },
+    ],
     focus: [
       'Designed modular route structure for attendance CRUD',
       'Implemented JWT auth middleware for protected endpoints',
@@ -22,7 +30,11 @@ const PROJECTS = [
     img: '/proj-taskmanager.png',
     tag: 'Backend',
     desc: 'Full backend for a task management app — modular routes, middleware validation, and CRUD with MongoDB integration.',
-    stack: ['Node.js', 'Express.js', 'MongoDB'],
+    stack: [
+      { label: 'Node.js',   icon: <SiNodedotjs /> },
+      { label: 'Express.js',icon: <SiExpress /> },
+      { label: 'MongoDB',   icon: <SiMongodb /> },
+    ],
     focus: [
       'Structured route grouping with Express Router',
       'Centralised async error handling pattern',
@@ -36,7 +48,12 @@ const PROJECTS = [
     img: '/proj-auth.png',
     tag: 'Auth / JWT',
     desc: 'Standalone JWT authentication service with login, registration, bcrypt password hashing, and protected route middleware.',
-    stack: ['Node.js', 'Express.js', 'MongoDB', 'bcrypt'],
+    stack: [
+      { label: 'Node.js',   icon: <SiNodedotjs /> },
+      { label: 'Express.js',icon: <SiExpress /> },
+      { label: 'MongoDB',   icon: <SiMongodb /> },
+      { label: 'bcrypt',    icon: <FaUserShield /> },
+    ],
     focus: [
       'JWT sign/verify lifecycle and token expiry',
       'Password hashing with bcrypt salt rounds',
@@ -50,7 +67,12 @@ const PROJECTS = [
     img: '/proj-catalogue.png',
     tag: 'API Design',
     desc: 'Backend API for a product catalogue with filtering, sorting, pagination, and structured controller/service separation.',
-    stack: ['Node.js', 'Express.js', 'MongoDB', 'Mongoose'],
+    stack: [
+      { label: 'Node.js',   icon: <SiNodedotjs /> },
+      { label: 'Express.js',icon: <SiExpress /> },
+      { label: 'MongoDB',   icon: <SiMongodb /> },
+      { label: 'Mongoose',  icon: <SiMongoose /> },
+    ],
     focus: [
       'Reusable APIFeatures class for query building',
       'Controller/service/model separation (MVC)',
@@ -118,14 +140,24 @@ export default function Projects() {
                 <div className="proj-section">
                   <span className="proj-label mono">Tech Stack</span>
                   <div className="proj-chips">
-                    {p.stack.map(s => <span key={s} className="floating-pill">{s}</span>)}
+                    {p.stack.map(s => (
+                      <span key={s.label} className="floating-pill floating-pill--icon">
+                        <span className="floating-pill__icon">{s.icon}</span>
+                        {s.label}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
                 <div className="proj-section">
                   <span className="proj-label mono">Backend Focus</span>
                   <ul className="proj-focus">
-                    {p.focus.map(f => <li key={f}>{f}</li>)}
+                    {p.focus.map(f => (
+                      <li key={f}>
+                        <FiArrowRight className="proj-focus__icon" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
