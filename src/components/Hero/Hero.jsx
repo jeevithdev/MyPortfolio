@@ -1,75 +1,78 @@
-import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { SiNodedotjs, SiExpress, SiMongodb } from 'react-icons/si'
 import { TbApi } from 'react-icons/tb'
 import './Hero.css'
 
 export default function Hero() {
-  const ref = useRef(null)
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  }
 
-  useEffect(() => {
-    const raf = requestAnimationFrame(() =>
-      ref.current?.classList.add('hero--loaded')
-    )
-    return () => cancelAnimationFrame(raf)
-  }, [])
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+    },
+  }
 
   return (
     <section className="hero" id="home" aria-label="Introduction">
 
-      {/* ── Decorative blobs: absolute, purely visual, z-index 0 ── */}
+      {/* ── Decorative blobs ── */}
       <div className="hero__blob hero__blob--a" aria-hidden="true" />
       <div className="hero__blob hero__blob--b" aria-hidden="true" />
 
-      {/* ── Faded watermark: absolute, bottom-left, z-index 0 ── */}
+      {/* ── Faded watermark ── */}
       <div className="hero__watermark" aria-hidden="true">BACKEND</div>
 
-      {/* ── Main content: constrained to layout-max, z-index 1 ── */}
-      <div className="container hero__inner" ref={ref}>
-
+      {/* ── Main content ── */}
+      <motion.div
+        className="container hero__inner"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* ────────── LEFT COLUMN ────────── */}
         <div className="hero__left">
-
-          {/* Badge — inline-block, auto width, never stretched */}
-          <span className="hero__badge" role="text">
+          <motion.span variants={itemVariants} className="hero__badge" role="text">
             Backend Developer · Node.js &amp; Express.js
-          </span>
+          </motion.span>
 
-          {/* Headline */}
-          <h1 className="hero__h1">
+          <motion.h1 variants={itemVariants} className="hero__h1">
             Backend<br />
             Systems<br />
             <span className="hero__h1-em">Developer.</span>
-          </h1>
+          </motion.h1>
 
-          {/* Subheadline */}
-          <p className="hero__sub">
+          <motion.p variants={itemVariants} className="hero__sub">
             Building structured and maintainable REST APIs
             using Node.js and Express.js.
-          </p>
+          </motion.p>
 
-          {/* Description */}
-          <p className="hero__desc">
+          <motion.p variants={itemVariants} className="hero__desc">
             Backend-focused developer passionate about modular
             architecture, clean routing, and scalable server-side logic.
-          </p>
+          </motion.p>
 
-          {/* CTAs */}
-          <div className="hero__ctas">
+          <motion.div variants={itemVariants} className="hero__ctas">
             <a href="#projects" className="btn btn-fill">View Projects</a>
             <a href="#contact"  className="btn btn-outline">Contact Me</a>
-          </div>
+          </motion.div>
         </div>
 
         {/* ────────── RIGHT COLUMN ────────── */}
-        <div className="hero__right">
-
-          {/* ── Image frame wrapper ── */}
+        <motion.div variants={itemVariants} className="hero__right">
           <div className="himg__wrapper" aria-label="Profile image">
-
-            {/* Accent corner blob */}
             <div className="himg__corner-blob" aria-hidden="true" />
-
-            {/* Profile photo */}
             <div className="himg__frame">
               <img
                 src="/profile.jpeg"
@@ -77,52 +80,74 @@ export default function Hero() {
                 className="himg__photo"
                 draggable="false"
               />
-
-              {/* Open-to-work overlay badge */}
               <span className="himg__status-badge">
                 <span className="himg__status-dot" aria-hidden="true" />
                 Open to Work
               </span>
             </div>
 
-            {/* ── Floating icon badges ── */}
-
-            {/* Node.js — top-left */}
-            <div className="hbadge hbadge--tl" aria-hidden="true">
+            {/* Floating icon badges */}
+            <motion.div
+              className="hbadge hbadge--tl"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.5, type: 'spring' }}
+            >
               <SiNodedotjs className="hbadge__icon" style={{ color: '#339933' }} />
               <span className="hbadge__label">Node.js</span>
-            </div>
+            </motion.div>
 
-            {/* Express.js — top-right */}
-            <div className="hbadge hbadge--tr" aria-hidden="true">
+            <motion.div
+              className="hbadge hbadge--tr"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9, duration: 0.5, type: 'spring' }}
+            >
               <SiExpress className="hbadge__icon" style={{ color: '#333' }} />
               <span className="hbadge__label">Express</span>
-            </div>
+            </motion.div>
 
-            {/* MongoDB — bottom-left */}
-            <div className="hbadge hbadge--bl" aria-hidden="true">
+            <motion.div
+              className="hbadge hbadge--bl"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.0, duration: 0.5, type: 'spring' }}
+            >
               <SiMongodb className="hbadge__icon" style={{ color: '#00ED64' }} />
               <span className="hbadge__label">MongoDB</span>
-            </div>
+            </motion.div>
 
-            {/* REST API — bottom-right */}
-            <div className="hbadge hbadge--br" aria-hidden="true">
+            <motion.div
+              className="hbadge hbadge--br"
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.1, duration: 0.5, type: 'spring' }}
+            >
               <TbApi className="hbadge__icon" style={{ color: '#6366f1' }} />
               <span className="hbadge__label">REST API</span>
-            </div>
-
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
+      </motion.div>
 
-      </div>
-
-      {/* Scroll indicator — purely decorative */}
-      <div className="hero__scroll-hint" aria-hidden="true">
+      {/* Scroll indicator */}
+      <motion.div
+        className="hero__scroll-hint"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        aria-hidden="true"
+      >
         <span className="hero__scroll-label">scroll</span>
         <div className="hero__scroll-track">
-          <div className="hero__scroll-thumb" />
+          <motion.div
+            className="hero__scroll-thumb"
+            animate={{ y: [0, 24, 0] }}
+            transition={{ repeat: Infinity, duration: 1.5, ease: 'easeInOut' }}
+          />
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
+

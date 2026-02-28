@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import {
   SiNodedotjs, SiExpress, SiJavascript, SiMongodb,
   SiMysql, SiGit, SiPostman, SiGithub,
@@ -60,25 +60,33 @@ const STACK = [
 ]
 
 export default function Skills() {
-  const ref = useRef(null)
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 },
+    },
+  }
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1 }
-    )
-    ref.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+  }
 
   return (
-    <section className="skills section" id="skills" ref={ref}>
+    <section className="skills section" id="skills">
       {/* Faded background word */}
       <div className="skills__bg-word" aria-hidden="true">ARCHITECTURE</div>
 
       <div className="container">
         {/* Header */}
-        <div className="skills__header reveal">
+        <motion.div
+          className="skills__header"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={itemVariants}
+        >
           <span className="eyebrow">// tech.stack</span>
           <h2 className="section-title" style={{ marginTop: '0.75rem' }}>
             Tech Stack
@@ -86,16 +94,22 @@ export default function Skills() {
           <p className="skills__sub">
             Categorised competencies across backend development
           </p>
-        </div>
+        </motion.div>
 
         {/* Floating grouped cards */}
-        <div className="skills__cards">
-          {GROUPS.map((g, gi) => (
-            <div
+        <motion.div
+          className="skills__cards"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          {GROUPS.map((g) => (
+            <motion.div
               key={g.title}
-              className="sg glass reveal"
+              variants={itemVariants}
+              className="sg glass"
               style={{
-                '--d': `${gi * 0.1}s`,
                 '--border-col': g.border,
               }}
             >
@@ -116,12 +130,18 @@ export default function Skills() {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Stack icon row */}
-        <div className="stack-row reveal" style={{ '--d': '0.25s' }}>
+        <motion.div
+          className="stack-row"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
           {STACK.map(s => (
             <div key={s.label} className="stack-item">
               <div className="stack-icon" style={{ color: s.color, borderColor: s.color + '44', background: s.color + '14' }}>
@@ -130,7 +150,7 @@ export default function Skills() {
               <span className="stack-item__label">{s.label}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

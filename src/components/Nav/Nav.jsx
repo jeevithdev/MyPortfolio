@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import './Nav.css'
 
 const LINKS = [
@@ -19,7 +20,12 @@ export default function Nav() {
   }, [])
 
   return (
-    <header className={`nav-wrap${scrolled ? ' nav-wrap--scrolled' : ''}`}>
+    <motion.header
+      className={`nav-wrap${scrolled ? ' nav-wrap--scrolled' : ''}`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+    >
       <nav className="nav glass">
         {/* Logo */}
         <a href="#" className="nav__logo" onClick={() => setOpen(false)}>
@@ -48,13 +54,32 @@ export default function Nav() {
       </nav>
 
       {/* Mobile drawer */}
-      <div className={`nav__drawer${open ? ' nav__drawer--open' : ''}`} aria-hidden={!open}>
-        {LINKS.map(l => (
-          <a key={l.href} href={l.href} className="nav__drawer-link" onClick={() => setOpen(false)}>
-            {l.label}
-          </a>
-        ))}
-      </div>
-    </header>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="nav__drawer nav__drawer--open"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            aria-hidden={!open}
+          >
+            {LINKS.map((l, i) => (
+              <motion.a
+                key={l.href}
+                href={l.href}
+                className="nav__drawer-link"
+                onClick={() => setOpen(false)}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1 }}
+              >
+                {l.label}
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
   )
 }

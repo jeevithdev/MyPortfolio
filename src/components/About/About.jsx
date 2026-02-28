@@ -1,31 +1,33 @@
-import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import './About.css'
 
 export default function About() {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.15 }
-    )
-    ref.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section className="about section" id="about" ref={ref}>
+    <section className="about section" id="about">
       <div className="about__bg" aria-hidden="true">BACKEND FOCUS</div>
       <div className="container about__layout">
-        <div className="about__left reveal">
+        <motion.div
+          className="about__left"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
           <span className="eyebrow">// about.me</span>
           <h2 className="section-title" style={{ marginTop: '0.75rem' }}>
             Backend development is<br />
             where <span className="text-accent">logic</span> meets<br />
             responsibility.
           </h2>
-        </div>
-        <div className="about__right reveal" style={{ '--d': '0.15s' }}>
+        </motion.div>
+        
+        <motion.div
+          className="about__right"
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="glass about__card rotate-pos">
             <p>
               I'm <strong>Jeevith K</strong>, a backend developer focused on building
@@ -47,7 +49,7 @@ export default function About() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -1,19 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { FiMail, FiGithub, FiLinkedin, FiCheck, FiArrowRight } from 'react-icons/fi'
 import './Contact.css'
 
 export default function Contact() {
-  const ref  = useRef(null)
   const [sent, setSent] = useState(false)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.12 }
-    )
-    ref.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -23,9 +14,15 @@ export default function Contact() {
   }
 
   return (
-    <section className="contact section" id="contact" ref={ref}>
+    <section className="contact section" id="contact">
       <div className="container">
-        <div className="contact__island reveal">
+        <motion.div
+          className="contact__island"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
           {/* Ambient orb */}
           <div className="contact__orb" aria-hidden="true" />
           <div className="contact__orb contact__orb--2" aria-hidden="true" />
@@ -63,10 +60,17 @@ export default function Contact() {
             {/* Right — form */}
             <div className="contact__right">
               {sent ? (
-                <div className="contact__sent" role="status" aria-live="polite">
+                <motion.div
+                  className="contact__sent"
+                  role="status"
+                  aria-live="polite"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4 }}
+                >
                   <div className="sent-icon" aria-hidden="true"><FiCheck /></div>
                   <p>Message sent! I'll get back to you soon.</p>
-                </div>
+                </motion.div>
               ) : (
                 <form className="cform" onSubmit={handleSubmit} noValidate>
                   <div className="cform__group">
@@ -88,7 +92,7 @@ export default function Contact() {
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

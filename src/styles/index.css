@@ -28,7 +28,7 @@
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'Fira Code', monospace;
 
-  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --r: 20px;
   --r-sm: 12px;
   --r-pill: 9999px;
@@ -154,30 +154,26 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   cursor: pointer;
   border: none;
   text-decoration: none;
-  transition: transform 0.2s var(--ease), box-shadow 0.2s;
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), background 0.4s var(--ease), color 0.4s var(--ease);
 }
-.btn:hover { transform: translateY(-2px); }
+.btn:hover { transform: translateY(-3px); }
 .btn-fill {
   background: var(--deep);
   color: var(--blush);
-  box-shadow: 0 4px 20px var(--shadow-md);
+  box-shadow: 0 4px 20px rgba(81, 31, 82, 0.18);
 }
-.btn-fill:hover { box-shadow: 0 8px 28px rgba(81,31,82,0.35); }
+.btn-fill:hover { box-shadow: 0 10px 30px rgba(81, 31, 82, 0.36); }
 .btn-outline {
   background: var(--white);
   color: var(--deep);
-  border: 2px solid rgba(81,31,82,0.35);   /* visible border, not ghost */
+  border: 2px solid rgba(81,31,82,0.35);
 }
-.btn-outline:hover { border-color: var(--deep); box-shadow: 0 6px 20px var(--shadow-md); }
+.btn-outline:hover { 
+  border-color: var(--deep); 
+  box-shadow: 0 6px 20px rgba(81, 31, 82, 0.22); 
+}
 
-/* ─── Reveal ─────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal[style*='--d'] { transition-delay: var(--d, 0s); }
+
 
 /* ─── Code block stays dark ──────────────── */
 .code-glass {

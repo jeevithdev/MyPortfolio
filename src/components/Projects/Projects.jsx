@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { FiArrowRight } from 'react-icons/fi'
 import { SiNodedotjs, SiExpress, SiMongodb, SiJsonwebtokens, SiMongoose } from 'react-icons/si'
 import { FaUserShield } from 'react-icons/fa'
@@ -83,21 +83,16 @@ const PROJECTS = [
 ]
 
 export default function Projects() {
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.08 }
-    )
-    ref.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section className="projects section" id="projects" ref={ref}>
+    <section className="projects section" id="projects">
       <div className="container">
-        <div className="proj__hdr reveal">
+        <motion.div
+          className="proj__hdr"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
           <span className="eyebrow">// projects.built</span>
           <h2 className="section-title" style={{ marginTop: '0.75rem' }}>
             Systems Built<br />
@@ -106,15 +101,18 @@ export default function Projects() {
           <p className="proj__hdr-sub">
             Detailed Engineering Portfolio · Placement 2024
           </p>
-        </div>
+        </motion.div>
 
         {/* Projects — alternating layout */}
         <div className="proj__list">
           {PROJECTS.map((p, i) => (
-            <div
+            <motion.div
               key={p.num}
-              className={`proj-row reveal${i % 2 === 1 ? ' proj-row--rev' : ''}`}
-              style={{ '--d': `${i * 0.08}s` }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className={`proj-row${i % 2 === 1 ? ' proj-row--rev' : ''}`}
             >
               {/* ── Left: image panel ── */}
               <div className="proj-img-wrap">
@@ -166,10 +164,11 @@ export default function Projects() {
                   <p className="proj-learning-text">{p.learning}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   )
 }
+

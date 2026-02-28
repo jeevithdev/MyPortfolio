@@ -7,18 +7,19 @@
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   z-index: 100;
-  padding: 16px var(--layout-px);       /* same horizontal padding as sections */
-  transition: background 0.3s, box-shadow 0.3s;
+  padding: 20px var(--layout-px);       /* slightly larger initial padding */
+  transition: background 0.5s var(--ease), padding 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 
 /* When scrolled — frosted backdrop on the full bar */
 .nav-wrap--scrolled {
-  background: rgba(248, 246, 248, 0.88);
+  padding: 12px var(--layout-px);       /* shrinks gracefully when scrolled */
+  background: rgba(248, 246, 248, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 1px 0 rgba(81, 31, 82, 0.08);
+  box-shadow: 0 4px 24px rgba(81, 31, 82, 0.08); /* softer, premium shadow */
 }
 
 /* Inner row — constrained to same max-width as content */
@@ -126,25 +127,20 @@
 /* ─── Mobile drawer ─── */
 .nav__drawer {
   position: fixed;
-  inset: 0;
-  background: rgba(248, 246, 248, 0.97);
+  top: 0; left: 0;
+  width: 100%; height: 100vh;
+  background: rgba(248, 246, 248, 0.98);
   backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 32px;
-  transform: translateY(-100%);
-  visibility: hidden;           /* hides content & removes from a11y tree */
-  pointer-events: none;
-  transition: transform 0.4s var(--ease), visibility 0s 0.4s;
+  pointer-events: auto;
   z-index: 90;
 }
 .nav__drawer--open {
-  transform: translateY(0);
-  visibility: visible;
   pointer-events: auto;
-  transition: transform 0.4s var(--ease), visibility 0s 0s;
 }
 .nav__drawer-link {
   font-size: 1.4rem;
