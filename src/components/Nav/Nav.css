@@ -24,6 +24,8 @@
 
 /* Inner row — constrained to same max-width as content */
 .nav {
+  position: relative;
+  z-index: 100; /* Keeps logo and burger above drawer */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -154,4 +156,13 @@
 @media (max-width: 680px) {
   .nav__links { display: none; }
   .nav__burger { display: flex; }
+
+  /* Always keep the background frosted on mobile to prevent illegible overlapping */
+  .nav-wrap {
+    padding: 12px var(--layout-px);
+    background: rgba(248, 246, 248, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 24px rgba(81, 31, 82, 0.08);
+  }
 }
